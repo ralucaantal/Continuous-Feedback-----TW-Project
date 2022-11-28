@@ -1,0 +1,10 @@
+Aplicatie de feedback continuu
+--> Utilizatorii se vor autentifica pe prima pagina a aplicatiei
+--> Odata logati, utilizatorii vor fi redirectionati spre pagina Home
+--> Utilizatorii de tip profesor pe pagina home vor avea o sectiune de creare activitate si un istoric cu activitatile create, 
+care vor putea fi accesate prin click pentru a vizualiza statisticile oferite de feedback, dar si detalii despre respectiva activitate
+--> Utilizatorii de tip student vor avea o sectiune de accesare activitate, unde vor putea introduce codul aferent unei activitati
+--> Totodata, li se va afisa o lista cu activitatile la care au acces
+--> Cu un click pe o activitate, studentilor li se va deschide pagina de feedback, care va afisa totodata si detalii despre activitatea respectiva, 
+si care va avea atasata si o sectiune in care se pot pune intrebari profesorilor
+-->Atunci cand nu mai vor sa ofere feedback, studentii isi pot sterge activitatea din lista.
