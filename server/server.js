@@ -1,5 +1,19 @@
 const express = require("express");
+const cors = require("cors");
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+var bodyParser = require("body-parser");
+
 const app = express();
+app.use(cors(corsOptions)); // Use this after the variable declaration
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 var pg = require("pg");
 var connectionString = "postgres://postgres:6203@localhost:5432/feedback";
 var pgClient = new pg.Client(connectionString);
@@ -10,8 +24,37 @@ pgClient
   .then((data) => {
     console.log(data[0].username);
   });
+app.post("/login", (req, res) => {
+  console.log("Ai facut POST cu datele: ", req.body);
+  let username = req.body.username;
+  let password = req.body.password;
+  //verific daca exista utilizatorul in baza de date
+  pgClient
+    .query("select username, password from users where username=$1;", [
+      username,
+    ])
+    .then((res) => res.rows)
+    .then((data) => {
+      console.log("sunt in fetch de la baza de date");
+      console.log(data);
+      console.log(data.length);
+      if (data.length == 0) {
+        console.log("nu exista");
+        res.send({ message: "Username sau parola invalide" });
+      } else {
+        console.log("utilizatorul exista");
 
+        //verific parolele
+        if (password === data[0].password) {
+          res.send({ message: "Login efectuat cu succes!" });
+        } else {
+          res.send({ message: "Username sau parola invalide" });
+        }
+      }
+    });
+});
 app.get("/api", (req, res) => {
+  console.log("ceva");
   res.json({ users: ["Administrator", "Profesor", "Student"] });
 });
 
