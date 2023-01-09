@@ -5,6 +5,61 @@ import IPv4 from "../index";
 
 // const LoginForm = () => {
 export default function Register() {
+  const [errorDataRegister, setErrorDataRegister] = useState({ message: "" });
+
+  const registerData = {
+    username: "",
+    password: "",
+    type:""
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      "Username este: " +
+        registerData.username +
+        " " +
+        "Parola este: " +
+        registerData.password+
+        "Tipul contului este: " +
+        registerData.type
+    );
+
+    if (registerData.username !== "" && registerData.password !== "" && registerData.type!="") {
+        // loginData.username = "";
+        // loginData.password = "";
+        Array.from(document.querySelectorAll("input")).forEach(
+          (input) => (input.value = "")
+        );
+
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify(registerData),
+            headers: { "Content-Type": "application/json" },
+          };
+
+          console.log(requestOptions);
+          let input = IPv4 + ":5000/login";
+          fetch(input, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data.message);
+              setErrorDataRegister({ message: data.message });
+
+  }).catch((error)=>{console.log(error);});
+
+} else {
+    setErrorDataRegister({message: "Date invalide!"});
+    registerData.username="";
+    registerData.password="";
+    registerData.type="";
+
+    Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+    }
+}
+
   return (
     <div className="main">
       <div className="loginForm">
@@ -24,7 +79,7 @@ export default function Register() {
             />
 
             <input type="radio" id="student" name="userType" value="STUDENT" />
-            <label for="student">Student</label>
+            <label>Student</label>
             <br></br>
             <input
               type="radio"
@@ -32,14 +87,14 @@ export default function Register() {
               name="userType"
               value="PROFESOR"
             />
-            <label for="profesor">Profesor</label>
+            <label>Profesor</label>
             <br></br>
 
             <div className="login-btn">
               <button className="btn1">INREGISTRARE</button>
             </div>
 
-            {/* <div>{errorDataLogin.message}</div> */}
+            <div>{errorDataRegister.message}</div>
           </div>
         </form>
       </div>
