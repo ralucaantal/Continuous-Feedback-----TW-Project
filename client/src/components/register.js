@@ -25,6 +25,8 @@ export default function Register() {
         registerData.type
     );
 
+    console.log("sunt aici");
+
     if (registerData.username !== "" && registerData.password !== "" && registerData.type!="") {
         // loginData.username = "";
         // loginData.password = "";
