@@ -48,11 +48,13 @@ export default function LoginForm() {
       fetch(input, requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.message);
+          console.log(data);
           if(data.message==="Login efectuat cu succes pentru STUDENT!"){
+            localStorage.setItem("token",data.jwt);
             window.location.href="/student";
           }
           else if(data.message==="Login efectuat cu succes pentru PROFESOR!"){
+            localStorage.setItem("token",data.jwt);
             window.location.href="/teacher";
           }
           setErrorDataLogin({ message: data.message });
