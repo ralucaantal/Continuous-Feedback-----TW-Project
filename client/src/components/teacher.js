@@ -67,6 +67,7 @@ export default function Teacher() {
 
   const handleMyActivitiesClick = (e) => {
     console.log("Am dat click");
+    document.getElementById("myActivities").style.display = "block";
   };
 
   const handleLogout = (e) => {
@@ -149,7 +150,7 @@ export default function Teacher() {
           </li>
         </ul>
       </nav>
-      <div>
+      <div className="content">
         <div
           className="addActivityForm"
           id="newActivity"
@@ -182,6 +183,9 @@ export default function Teacher() {
               <div>{errorDataRegisterActivity.message}</div>
             </div>
           </form>
+        </div>
+        <div className="myActivities" id="myActivities" style={{ display: "none" }}>
+          <h3>Activitatile mele</h3>
         </div>
       </div>
     </div>
