@@ -27,7 +27,7 @@ label.pagProfesor {
   color: white;
   font-size: 35px;
   line-height: 80px;
-  padding: 0 100px;
+  padding: 0 50px;
   font-weight: bold;
 }
 
@@ -63,48 +63,78 @@ a:hover {
   height: 50%;
 }
 
-.coverteacher{
-    background-color: white;
-    width: 20em;
-    height: 25em;
-    position: relative;
-    border-radius: 1em;
-    box-shadow: 0 0.188em 1.550em rgb(156,156,156);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 2em;
-    margin-left: 2em;
+.coverteacher {
+  background-color: white;
+  width: 20em;
+  height: 25em;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
-.inscriere-btn{
-    width: 40%;
-    height: 3em;
-    background-color: rgb(243, 188, 197);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    border-radius: 0.25em;
-    cursor: pointer;
+.inscriere-btn {
+  width: 40%;
+  height: 3em;
+  background-color: rgb(243, 188, 197);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 0.25em;
+  cursor: pointer;
 }
 
-.inscriere-btn:hover{
-    transform: scale(1.25); 
+.inscriere-btn:hover {
+  transform: scale(1.25);
 }
 
-.btn1{
-    width: 40%;
-    height: 3em;
-    background-color: rgb(243, 188, 197);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    border-radius: 0.25em;
-    cursor: pointer;
-    font-family: "CustomFont";
-    src: url("../css/fonts/RolexLight.woff2");
-    border: none;
+.btn1 {
+  width: 40%;
+  height: 3em;
+  background-color: rgb(243, 188, 197);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-family: "CustomFont";
+  src: url("../css/fonts/RolexLight.woff2");
+  border: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.addActivityForm {
+  width: 40%;
+}
+
+.myActivities {
+  background-color: white;
+  text-align: center;
+  width: 50em;
+  height: 25em;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  overflow: auto;
+  display: flex;
 }
