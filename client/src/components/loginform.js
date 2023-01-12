@@ -49,6 +49,12 @@ export default function LoginForm() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data.message);
+          if(data.message==="Login efectuat cu succes pentru STUDENT!"){
+            window.location.href="/student";
+          }
+          else if(data.message==="Login efectuat cu succes pentru PROFESOR!"){
+            window.location.href="/teacher";
+          }
           setErrorDataLogin({ message: data.message });
           // if (data.message === "Email sau parola gresita.") {
           //     setErrorDataLogin({message: "Date invalide."})

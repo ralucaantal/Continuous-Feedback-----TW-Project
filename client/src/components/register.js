@@ -5,41 +5,120 @@ import IPv4 from "../index";
 
 // const LoginForm = () => {
 export default function Register() {
+  const [errorDataRegister, setErrorDataRegister] = useState({ message: "" });
+
+  const registerData = {
+    username: "",
+    password: "",
+    type: "",
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      "Username este: " +
+        registerData.username +
+        " " +
+        "Parola este: " +
+        registerData.password +
+        "Tipul contului este: " +
+        registerData.type
+    );
+
+    console.log("sunt aici");
+    console.log("sunt aici");
+
+    if (
+      registerData.username !== "" &&
+      registerData.password !== "" &&
+      registerData.type !== ""
+    ) {
+      // loginData.username = "";
+      // loginData.password = "";
+      Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+
+      const requestOptions = {
+        method: "POST",
+        body: JSON.stringify(registerData),
+        headers: { "Content-Type": "application/json" },
+      };
+
+      console.log(requestOptions);
+      let input = IPv4 + ":5000/register";
+      fetch(input, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          setErrorDataRegister({ message: data.message });
+          if(data.message==="s-a adaugat cu succes!"){
+            window.location.href="/login"
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setErrorDataRegister({ message: "Date invalide!" });
+      registerData.username = "";
+      registerData.password = "";
+      registerData.type = "";
+
+      Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+    }
+  };
+
+  const handleChange = (e) => {
+    //e.preventDefault();
+    console.log(e.target.value);
+    registerData.type=e.target.value;
+  };
+
   return (
     <div className="main">
       <div className="loginForm">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="cover">
             <h1>Inregistreaza-te</h1>
             <input
               type="user"
               placeholder="username"
-              //onChange={(e) => (loginData.username = e.target.value)}
+              onChange={(e) => (registerData.username = e.target.value)}
             />
 
             <input
               type="password"
               placeholder="password"
-              // onChange={(e) => (loginData.password = e.target.value)}
+              onChange={(e) => (registerData.password = e.target.value)}
             />
 
-            <input type="radio" id="student" name="userType" value="STUDENT" />
-            <label for="student">Student</label>
+            <input
+              type="radio"
+              id="student"
+              name="userType"
+              value="STUDENT"
+              onChange={handleChange}
+            />
+            <label>Student</label>
             <br></br>
             <input
               type="radio"
               id="profesor"
               name="userType"
               value="PROFESOR"
+              onChange={handleChange}
             />
-            <label for="profesor">Profesor</label>
+            <label>Profesor</label>
             <br></br>
 
             <div className="login-btn">
               <button className="btn1">INREGISTRARE</button>
             </div>
 
-            {/* <div>{errorDataLogin.message}</div> */}
+            <div>{errorDataRegister.message}</div>
           </div>
         </form>
       </div>
