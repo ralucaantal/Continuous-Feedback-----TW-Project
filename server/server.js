@@ -24,13 +24,40 @@ pgClient
   .then((data) => {
     console.log(data[0].username);
   });
+
+app.post("/register", (req, res) => {
+  console.log("Ai facut POST cu datele: ", req.body);
+  let username = req.body.username;
+  let password = req.body.password;
+  let type = req.body.type;
+  //verific daca exista utilizatorul in baza de date
+  pgClient
+    .query("select username from users where username=$1;", [
+      username,
+    ])
+    .then((res) => res.rows)
+    .then((data) => {
+      console.log("sunt in fetch de la baza de date");
+      console.log(data);
+      console.log(data.length);
+      if (data.length == 0) {
+        console.log("nu exista");
+        pgClient.query("insert into users(username, password, tip) values($1,$2,$3);",[username, password,type])
+        .then((result)=>{res.send({message: "s-a adaugat cu succes!"});})
+      } else {
+        console.log("utilizatorul exista");
+        res.send({message: "utilizatorul deja exista"});
+      }
+    });
+});
+
 app.post("/login", (req, res) => {
   console.log("Ai facut POST cu datele: ", req.body);
   let username = req.body.username;
   let password = req.body.password;
   //verific daca exista utilizatorul in baza de date
   pgClient
-    .query("select username, password from users where username=$1;", [
+    .query("select username, password, tip from users where username=$1;", [
       username,
     ])
     .then((res) => res.rows)
@@ -46,13 +73,19 @@ app.post("/login", (req, res) => {
 
         //verific parolele
         if (password === data[0].password) {
-          res.send({ message: "Login efectuat cu succes!" });
+          if(data[0].tip==="PROFESOR")
+          {res.send({ message: "Login efectuat cu succes pentru PROFESOR!" });}
+          else if(data[0].tip==="STUDENT")
+          {
+            res.send({ message: "Login efectuat cu succes pentru STUDENT!" });
+          }
         } else {
-          res.send({ message: "Username sau parola invalide" });
+          res.send({ message: "Date invalide" });
         }
       }
     });
 });
+
 app.get("/api", (req, res) => {
   console.log("ceva");
   res.json({ users: ["Administrator", "Profesor", "Student"] });
