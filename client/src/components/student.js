@@ -213,7 +213,9 @@ export default function Student() {
           style={{ display: "none", width: "100%", height: "100%" }}
         >
           <div className="coverFeedback">
-            <form className="divFeedback" onSubmit={handleFeedback}>
+            <form 
+            // className="divFeedback" 
+            onSubmit={handleFeedback}>
               <div
                 className="coverReaction"
                 onClick={(e) => {

@@ -187,7 +187,7 @@ app.post("/feedback",(req,res)=>{
       [now,code,reaction]
     )
     .then((result) => {
-      res.send({ message: "feedback oferit cu succes" });
+      res.send({ message: "Multumesc pentru feedback-ul oferit!" });
     });
 
 });
