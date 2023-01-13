@@ -19,6 +19,7 @@ export default function Student() {
   const [username, setUsername] = useState({ username: "" });
   const [password, setPassword] = useState({ password: "" });
   const [type, setType] = useState({ type: "" });
+  const [activityCode, setActivityCode] = useState({ code: "" });
 
   function decodeJWT() {
     if (localStorage.getItem("token")) {
@@ -92,9 +93,10 @@ export default function Student() {
     const date = new Date();
     console.log(date);
     if (entryData.code !== "") {
-      Array.from(document.querySelectorAll("input")).forEach(
-        (input) => (input.value = "")
-      );
+      setActivityCode({ code: entryData.code });
+      // Array.from(document.querySelectorAll("input")).forEach(
+      //   (input) => (input.value = "")
+      // );
 
       const requestOptions = {
         method: "POST",
@@ -127,14 +129,19 @@ export default function Student() {
     }
   };
 
-const feedback={
-  reaction:""
-};
+  const feedback = {
+    reaction: "",
+    code: "",
+    now: "",
+  };
 
   const handleFeedback = (e) => {
     e.preventDefault();
+    feedback.code = activityCode.code;
+    console.log(activityCode.code);
+    feedback.now = new Date();
     console.log(feedback.reaction);
-    if(feedback.reaction!==""){
+    if (feedback.reaction !== "") {
       Array.from(document.querySelectorAll("input")).forEach(
         (input) => (input.value = "")
       );
@@ -146,18 +153,17 @@ const feedback={
       };
 
       console.log(feedback);
-      let input = IPv4 + ":5000/addActivity";
+      let input = IPv4 + ":5000/feedback";
       fetch(input, requestOptionsFeedback)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        setErrorDataFeedback({ message: data.message });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-    else{
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          setErrorDataFeedback({ message: data.message });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
       console.log("Feedback invalid");
       setErrorDataFeedback({ message: "Feedback invalid" });
       feedback.reaction = "";
@@ -202,28 +208,63 @@ const feedback={
             </div>
           </form>
         </div>
-        <div  id="feedback" style={{ display: "none", width:"100%",height:"100%" }}>
+        <div
+          id="feedback"
+          style={{ display: "none", width: "100%", height: "100%" }}
+        >
           <div className="coverFeedback">
             <form className="divFeedback" onSubmit={handleFeedback}>
-              <div className="coverReaction" onClick={(e)=>{feedback.reaction="smiley"}}>
-                <img src={smiley}
-                 alt="smiley face" style={{width:"25%",height:"25%"}}></img>
-                 <h4>Smiley face</h4>
+              <div
+                className="coverReaction"
+                onClick={(e) => {
+                  feedback.reaction = "smiley";
+                }}
+              >
+                <img
+                  src={smiley}
+                  alt="smiley face"
+                  style={{ width: "25%", height: "25%" }}
+                ></img>
+                <h4>Smiley face</h4>
               </div>
-              <div className="coverReaction" onClick={(e)=>{feedback.reaction="frowny"}}>
-              <img src={frowny}
-                 alt="smiley face" style={{width:"25%",height:"25%"}}></img>
-                 <h4>Frowny face</h4>
+              <div
+                className="coverReaction"
+                onClick={(e) => {
+                  feedback.reaction = "frowny";
+                }}
+              >
+                <img
+                  src={frowny}
+                  alt="smiley face"
+                  style={{ width: "25%", height: "25%" }}
+                ></img>
+                <h4>Frowny face</h4>
               </div>
-              <div className="coverReaction" onClick={(e)=>{feedback.reaction="surprised"}}>
-              <img src={surprised}
-                 alt="smiley face" style={{width:"25%",height:"25%"}}></img>
-                 <h4>Surprised face</h4>
+              <div
+                className="coverReaction"
+                onClick={(e) => {
+                  feedback.reaction = "surprised";
+                }}
+              >
+                <img
+                  src={surprised}
+                  alt="smiley face"
+                  style={{ width: "25%", height: "25%" }}
+                ></img>
+                <h4>Surprised face</h4>
               </div>
-              <div className="coverReaction" onClick={(e)=>{feedback.reaction="confused"}}>
-              <img src={confused}
-                 alt="smiley face" style={{width:"25%",height:"25%"}}></img>
-                 <h4>Confused face</h4>
+              <div
+                className="coverReaction"
+                onClick={(e) => {
+                  feedback.reaction = "confused";
+                }}
+              >
+                <img
+                  src={confused}
+                  alt="smiley face"
+                  style={{ width: "25%", height: "25%" }}
+                ></img>
+                <h4>Confused face</h4>
               </div>
               <div className="feedback-btn">
                 <button className="btn1">Ofera Feedback</button>

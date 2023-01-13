@@ -176,6 +176,22 @@ app.post("/entryActivity",(req,res)=>{
   })
 });
 
+app.post("/feedback",(req,res)=>{
+  let code=req.body.code;
+  let now=new Date(req.body.now);
+  let reaction=req.body.reaction;
+
+  pgClient
+    .query(
+      "insert into feedbacks(timp,id_activitate,reactie) values($1,$2,$3);",
+      [now,code,reaction]
+    )
+    .then((result) => {
+      res.send({ message: "feedback oferit cu succes" });
+    });
+
+});
+
 
 app.get("/api", (req, res) => {
   console.log("ceva");
