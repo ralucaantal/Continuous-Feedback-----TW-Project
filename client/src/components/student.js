@@ -74,7 +74,53 @@ export default function Student() {
     document.getElementById("entryActivity").style.display = "block";
   };
 
+  const entryData = {
+    code: "",
+    now: "",
+  };
+
   const handleSubmit = (e) => {
+    e.preventDefault();
+    entryData.now = new Date();
+    const date = new Date();
+    console.log(date);
+    if (entryData.code !== "") {
+      Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+
+      const requestOptions = {
+        method: "POST",
+        body: JSON.stringify(entryData),
+        headers: { "Content-Type": "application/json" },
+      };
+
+      console.log(requestOptions);
+      let input = IPv4 + ":5000/entryActivity";
+
+      fetch(input, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.message);
+          setErrorDataEntry({ message: data.message });
+          if (data.message === "Activitatea poate primi feedback!") {
+            document.getElementById("feedback").style.display = "block";
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("Cod invalid");
+      setErrorDataEntry({ message: "Cod invalid" });
+      entryData.code = "";
+      Array.from(document.querySelectorAll("input")).forEach(
+        (input) => (input.value = "")
+      );
+    }
+  };
+
+  const handleFeedback=(e)=>{
 
   };
 
@@ -84,11 +130,8 @@ export default function Student() {
         <label className="pagStudent">Pagina studentului</label>
         <ul>
           <li>
-            <a onClick={handleEntryActivityClick}>Inscriere activitate</a>
+            <a onClick={handleEntryActivityClick}>Accesare activitate</a>
           </li>
-          {/* <li>
-          <a onClick={handleMyActivitiesClick}>Activitatile mele</a>
-        </li> */}
           <li>
             <a onClick={handleLogout}>Logout</a>
           </li>
@@ -107,7 +150,7 @@ export default function Student() {
               <input
                 type="text"
                 placeholder="Codul unic al activitatii"
-                // onChange={(e) => (activityData.final = e.target.value)}
+                onChange={(e) => (entryData.code = e.target.value)}
               />
               <div className="inscriere-btn">
                 <button className="btn1">Feedback</button>
@@ -115,6 +158,13 @@ export default function Student() {
               <div>{errorDataEntry.message}</div>
             </div>
           </form>
+        </div>
+        <div className="feedback" id="feedback" style={{ display: "none" }}>
+          <div className="coverFeedback">
+            <form onSubmit={handleFeedback}>
+
+            </form>
+          </div>
         </div>
       </div>
     </div>
