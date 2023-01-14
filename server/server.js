@@ -148,50 +148,74 @@ app.post("/addActivity", (req, res) => {
     });
 });
 
-app.post("/entryActivity",(req,res)=>{
-  let code=req.body.code;
-  let now=new Date(req.body.now);
+app.post("/entryActivity", (req, res) => {
+  let code = req.body.code;
+  let now = new Date(req.body.now);
 
   pgClient
-  .query("select * from activities where id_activitate=$1;",[code])
-  .then((res) => res.rows)
-  .then((data) => {
-    if (data.length == 0) {
-      console.log("nu exista");
-      res.send({ message: "Codul activitatii nu exista" });
-    }
-    else{
-      console.log(data);
-      var data1=new Date(data[0].inceput);
-      var data2=new Date(data[0].final);
-      console.log(now.getTime(),data1.getTime(),data2.getTime());
-      if(now.getTime()>=data1.getTime() && now.getTime() <=data2.getTime()){
-        console.log("e ok pt feedback");
-        res.send({message: "Activitatea poate primi feedback!"});
+    .query("select * from activities where id_activitate=$1;", [code])
+    .then((res) => res.rows)
+    .then((data) => {
+      if (data.length == 0) {
+        console.log("nu exista");
+        res.send({ message: "Codul activitatii nu exista" });
+      } else {
+        console.log(data);
+        var data1 = new Date(data[0].inceput);
+        var data2 = new Date(data[0].final);
+        console.log(now.getTime(), data1.getTime(), data2.getTime());
+        if (
+          now.getTime() >= data1.getTime() &&
+          now.getTime() <= data2.getTime()
+        ) {
+          console.log("e ok pt feedback");
+          res.send({ message: "Activitatea poate primi feedback!" });
+        } else {
+          res.send({ message: "Nu ai voie sa dai acum feedback!" });
+        }
       }
-      else{ 
-        res.send({message: "Nu ai voie sa dai acum feedback!"});
-      }
-    }
-  })
+    });
 });
 
-app.post("/feedback",(req,res)=>{
-  let code=req.body.code;
-  let now=new Date(req.body.now);
-  let reaction=req.body.reaction;
+app.post("/feedback", (req, res) => {
+  let code = req.body.code;
+  let now = new Date(req.body.now);
+  let reaction = req.body.reaction;
 
   pgClient
     .query(
       "insert into feedbacks(timp,id_activitate,reactie) values($1,$2,$3);",
-      [now,code,reaction]
+      [now, code, reaction]
     )
     .then((result) => {
       res.send({ message: "Multumesc pentru feedback-ul oferit!" });
     });
-
 });
 
+app.post("/showActivities", (req, res) => {
+  console.log("in showActivities am venit cu request: ", req.body);
+  let idUser = req.body.idUser;
+  let activities = [];
+  pgClient
+    .query("select * from activities where owner_id=$1", [idUser])
+    .then((res) => res.rows)
+    .then((data) => {
+      for (let i = 0; i < data.length; i++) {
+        let auxArray = [];
+        let id_activitate = data[i].id_activitate;
+        let descriere_activitate = data[i].descriere_activitate;
+        let inceput = data[i].inceput;
+        let final = data[i].final;
+        auxArray.push(id_activitate, descriere_activitate, inceput, final);
+        activities.push(auxArray);
+      }
+      res.send({ message: activities });
+      // console.log(data.length);
+      // console.log(data);
+    });
+
+ // res.send({ message: "eroare" });
+});
 
 app.get("/api", (req, res) => {
   console.log("ceva");

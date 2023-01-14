@@ -124,16 +124,20 @@ a:hover {
   background-color: white;
   text-align: center;
   width: 600em;
-  height: 25em;
+  height: 35em;
   position: relative;
   border-radius: 1em;
   box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: space-around;
   margin-top: 2em;
   margin-left: 2em;
   margin-right: 2em;
   overflow: auto;
+}
+
+h3{
+  margin-top: 1em;
 }

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import IPv4 from "../index";
 import "./css/teacher.css";
+import { useTable } from "react-table";
 
 export default function Teacher() {
   // const navigate=useNavigate();
@@ -68,6 +69,32 @@ export default function Teacher() {
   const handleMyActivitiesClick = (e) => {
     console.log("Am dat click");
     document.getElementById("myActivities").style.display = "block";
+    const data = {
+      idUser: idUser.idUser,
+    };
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    console.log(requestOptions);
+    let input = IPv4 + ":5000/showActivities";
+
+    fetch(input, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          console.log(data.message);
+          setPendingTeacherRows(data.message);
+        } else {
+          console.log(data.message);
+        }
+        // setErrorDataRegisterActivity({ message: data.message });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleLogout = (e) => {
@@ -80,6 +107,10 @@ export default function Teacher() {
     start: "",
     final: "",
     owner: idUser.idUser,
+  };
+
+  const reqForShowActivitiesData = {
+    idUser: "",
   };
 
   const handleSubmit = (e) => {
@@ -122,6 +153,29 @@ export default function Teacher() {
         .catch((error) => {
           console.log(error);
         });
+
+      reqForShowActivitiesData.idUser = idUser.idUser;
+      const requestOptions2 = {
+        method: "POST",
+        body: JSON.stringify(reqForShowActivitiesData),
+        headers: { "Content-Type": "application/json" },
+      };
+
+      let input2 = IPv4 + ":5000/showActivities";
+      fetch(input2, requestOptions2)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            console.log(data.message);
+            setPendingTeacherRows(data.message);
+          } else {
+            console.log(data.message);
+          }
+          // setErrorDataRegisterActivity({ message: data.message });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       console.log("Date invalide!");
       setErrorDataRegisterActivity({ message: "Date invalide!" });
@@ -133,6 +187,8 @@ export default function Teacher() {
       );
     }
   };
+
+  const [pendingTeacherRows, setPendingTeacherRows] = useState([]);
 
   return (
     <div>
@@ -178,14 +234,104 @@ export default function Teacher() {
               />
 
               <div className="inscriere-btn">
-                <button className="btn1">Login</button>
+                <button className="btn1">Adauga activitate</button>
               </div>
               <div>{errorDataRegisterActivity.message}</div>
             </div>
           </form>
         </div>
-        <div className="myActivities" id="myActivities" style={{ display: "none" }}>
+        <div
+          className="myActivities"
+          id="myActivities"
+          style={{ display: "none" }}
+        >
           <h3>Activitatile mele</h3>
+
+          <div className="pendingTeacherRows">
+            <div className="pendingTeacherRows">
+              <span
+                className="pendingTeacherCell"
+                style={{
+                  width: "25%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Cod activitate
+              </span>
+              <span
+                className="pendingTeacherCell"
+                style={{
+                  width: "25%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Descriere
+              </span>
+              <span
+                className="pendingTeacherCell"
+                style={{
+                  width: "25%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Incepe la
+              </span>
+              <span
+                className="pendingTeacherCell"
+                style={{
+                  width: "25%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Se termina la
+              </span>
+            </div>
+            {pendingTeacherRows.map((row) => {
+              return (
+                <div
+                  key={row[0]}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    width: "100%",
+                    alignItems: "center",
+                  }}
+                >
+                  <div className="pendingTeacherRow">
+                    <span
+                      className="pendingTeacherCell"
+                      style={{ width: "25%" }}
+                    >
+                      {row[0]}
+                    </span>
+                    <span
+                      className="pendingTeacherCell"
+                      style={{ width: "25%" }}
+                    >
+                      {row[1]}
+                    </span>
+                    <span
+                      className="pendingTeacherCell"
+                      style={{ width: "25%" }}
+                    >
+                      {row[2]}
+                    </span>
+                    <span
+                      className="pendingTeacherCell"
+                      style={{ width: "25%" }}
+                    >
+                      {row[3]}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
