@@ -1,25 +1,17 @@
 import React, { useState } from "react";
 import "./css/loginform.css";
 import IPv4 from "../index";
-//import{useHistory} from 'react-router-dom'
 
-// const LoginForm = () => {
 export default function LoginForm() {
   const [popupStyle, showPopup] = useState("hide");
   const [errorDataLogin, setErrorDataLogin] = useState({ message: "" });
-
-  //let history=useHistory();
-
-  const popup = () => {
-    showPopup("login-popup");
-    setTimeout(() => showPopup("hide"), 3000);
-  };
 
   const loginData = {
     username: "",
     password: "",
   };
 
+  //aici gestionez ce se ontampla la click pe login
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(
@@ -30,9 +22,8 @@ export default function LoginForm() {
         loginData.password
     );
 
+    //se vf daca cele 2 campuri sunt completate, daca sunt se trimit la server
     if (loginData.username !== "" && loginData.password !== "") {
-      // loginData.username = "";
-      // loginData.password = "";
       Array.from(document.querySelectorAll("input")).forEach(
         (input) => (input.value = "")
       );
@@ -49,48 +40,26 @@ export default function LoginForm() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          if(data.message==="Login efectuat cu succes pentru STUDENT!"){
-            localStorage.setItem("token",data.jwt);
-            window.location.href="/student";
-          }
-          else if(data.message==="Login efectuat cu succes pentru PROFESOR!"){
-            localStorage.setItem("token",data.jwt);
-            window.location.href="/teacher";
+          if (data.message === "Login efectuat cu succes pentru STUDENT!") {
+            localStorage.setItem("token", data.jwt);
+            window.location.href = "/student";
+          } else if (
+            data.message === "Login efectuat cu succes pentru PROFESOR!"
+          ) {
+            //se salveaza tokenul in browser
+            localStorage.setItem("token", data.jwt);
+            window.location.href = "/teacher";
           }
           setErrorDataLogin({ message: data.message });
-          // if (data.message === "Email sau parola gresita.") {
-          //     setErrorDataLogin({message: "Date invalide."})
-          //     Array.from(document.querySelectorAll("input")).forEach(
-          //         input => (input.value = "")
-          //     );
-          // } else if (data.message === "Unable to log user, need more data.") {
-          //     setErrorDataLogin({message: "Date invalide."})
-          //     Array.from(document.querySelectorAll("input")).forEach(
-          //         input => (input.value = "")
-          //     );
-          // } else if (data.message === "Trebuie sa iti confirmi mail-ul!") {
-          //     setErrorDataLogin({message: data.message})
-          // } else {
-          //     localStorage.setItem('token', data.JWT);
-          //     setState({
-          //         loggedIn: true
-          //     });
-          //     window.location.href = '/';
-          // }
         })
         .catch((error) => {
           console.log(error);
-          // setError(true);
-          // Array.from(document.querySelectorAll("input")).forEach(
-          //     input => (input.value = "")
-          // );
-          // setErrorData({message: "Date invalide."})
         });
 
       console.log("date login resetate");
       setErrorDataLogin({ message: "Te-ai logat cu succes!" });
-      //history.push("/home");
     } else {
+      //se reseteaza datele completate
       console.log("Date invalide!");
       setErrorDataLogin({ message: "Date invalide!" });
       loginData.username = "";
@@ -106,21 +75,21 @@ export default function LoginForm() {
       <div className="loginForm">
         <form onSubmit={handleSubmit}>
           <div className="cover">
-            <h1>Login</h1>
+            <h1 style={{ fontFamily: "CustomFont", fontSize: "30px" }}>Conectare</h1>
             <input
               type="user"
-              placeholder="username"
+              placeholder="nume de utilizator"
               onChange={(e) => (loginData.username = e.target.value)}
             />
 
             <input
               type="password"
-              placeholder="password"
+              placeholder="parolă"
               onChange={(e) => (loginData.password = e.target.value)}
             />
 
             <div className="login-btn">
-              <button className="btn1">Login</button>
+              <button className="btn1" style={{ fontFamily: "CustomFont", fontSize: "15px" }}>Conectare</button>
             </div>
 
             <div className={popupStyle}>
@@ -135,5 +104,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
-// export default LoginForm;

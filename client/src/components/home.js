@@ -20,12 +20,10 @@ export default function Home() {
                 window.location.href = "/login";
               }}
             >
-              LOGHEAZA-TE
+              Conectare
             </button>
           </div>
-          <h1 style={{ fontFamily: "CustomFont", fontSize: "15px" }}>
-            Nu ai un cont?
-          </h1>
+          <h5>Nu ai un cont?</h5>
           <div className="login-btn">
             <button
               className="btn1"
@@ -33,7 +31,7 @@ export default function Home() {
                 window.location.href = "/register";
               }}
             >
-              INREGISTREAZA-TE
+              Înregistrare
             </button>
           </div>
         </div>
