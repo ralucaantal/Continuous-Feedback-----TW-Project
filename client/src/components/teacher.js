@@ -247,14 +247,14 @@ export default function Teacher() {
         >
           <h3>Activitatile mele</h3>
 
-          <div className="pendingTeacherRows">
+          <div className="pendingTeacherRows" style={{ width: "25em" }}>
             <div className="pendingTeacherRows">
               <span
                 className="pendingTeacherCell"
                 style={{
                   width: "25%",
                   background: "rgb(243, 188, 197)",
-                  textAlign: "center",
+                  textAlign: "center"
                 }}
               >
                 Cod activitate
@@ -302,7 +302,7 @@ export default function Teacher() {
                     alignItems: "center",
                   }}
                 >
-                  <div className="pendingTeacherRow">
+                  <div className="pendingTeacherRow" style={{ width: "100%" }}>
                     <span
                       className="pendingTeacherCell"
                       style={{ width: "25%" }}

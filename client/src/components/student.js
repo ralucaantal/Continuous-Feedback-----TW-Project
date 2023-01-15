@@ -202,7 +202,7 @@ export default function Student() {
                 onChange={(e) => (entryData.code = e.target.value)}
               />
               <div className="inscriere-btn">
-                <button className="btn1">Feedback</button>
+                <button className="btn1">Acceseaza activitate</button>
               </div>
               <div>{errorDataEntry.message}</div>
             </div>
@@ -218,6 +218,7 @@ export default function Student() {
             <form 
             className="divFeedback" 
             onSubmit={handleFeedback}>
+              <div className="reactions">
               <div
                 className="coverReaction"
                 onClick={(e) => {
@@ -270,10 +271,11 @@ export default function Student() {
                 ></img>
                 <h4>Confused face</h4>
               </div>
+              </div>
               <div className="feedback-btn">
                 <button className="btn1">Ofera Feedback</button>
               </div>
-              <div>{errorDataFeedback.message}</div>
+              <div className="mesaj">{errorDataFeedback.message}</div>
             </form>
           </div>
         </div>

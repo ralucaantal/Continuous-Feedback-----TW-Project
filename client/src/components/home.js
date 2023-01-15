@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="main">
       <div className="home">
-        <div className="cover" style={{width: "25em", height:"15em"}}>
+        <div className="cover" style={{width: "26em", height:"15em"}}>
           <h1>Bine ai venit!</h1>
           <div className="login-btn">
             <button
