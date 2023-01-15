@@ -1,212 +1,59 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "CustomFont";
-  src: url("../css/fonts/RolexLight.woff2");
-}
-
-.page {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-nav {
-  background: rgb(243, 188, 197);
-  height: 80px;
-  width: 100%;
-}
-
 label.pagProfesor {
   color: white;
-  font-size: 35px;
-  line-height: 80px;
-  padding: 0 50px;
-  font-weight: bold;
-}
-
-nav ul {
-  float: right;
-  margin-right: 20px;
-}
-
-nav ul li {
-  display: inline-block;
+  font-size: 30px;
   line-height: 80px;
   margin: 0 5px;
+  font-weight: bold;
+  font-family: "CustomFont";
 }
 
-nav ul li a {
-  color: white;
-  font-size: 17px;
-  padding: 7px 13px;
-  border-radius: 3px;
-  text-transform: uppercase;
-}
-
-a.active,
-a:hover {
-  background: #d01257;
-  transition: 0.5s;
-}
-
-.addActivityForm {
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  height: 50%;
-}
-
-.coverteacher {
+.coverteacher,
+.myActivities,
+.feedbackReactions {
   background-color: white;
-  width: 25em;
-  height: 25em;
-  position: relative;
+  width: fit-content;
+  height: fit-content;
   border-radius: 1em;
   box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   margin-top: 2em;
   margin-left: 2em;
   margin-right: 2em;
+  margin-bottom: 2em;
+  padding: 1em;
+  text-align: center;
 }
 
 .inscriere-btn {
-  width: 40%;
-  height: 3em;
   background-color: rgb(243, 188, 197);
   display: flex;
   justify-content: center;
-  align-items: center;
   transition: 0.5s;
   border-radius: 0.25em;
-  cursor: pointer;
 }
 
 .inscriere-btn:hover {
   transform: scale(1.25);
 }
 
-.btn1 {
-  width: 40%;
-  height: 3em;
-  background-color: rgb(243, 188, 197);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-  border-radius: 0.25em;
-  cursor: pointer;
-  font-family: "CustomFont";
-  src: url("../css/fonts/RolexLight.woff2");
-  border: none;
-}
-
 .content {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: flex-start;
 }
 
-.addActivityForm {
-  width: 40%;
-}
-
-.myActivities {
-  background-color: white;
-  text-align: center;
-  width: 28.5em;
-  height: 35em;
-  position: relative;
-  border-radius: 1em;
-  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: 2em;
-  margin-left: 2em;
-  margin-right: 2em;
-  overflow: auto;
-}
-
-h3 {
-  margin-top: 1em;
-  text-align: center;
-}
-
-.pendingTeacherRows {
-  overflow-wrap: break-word;
-  text-align: center;
-  border-radius: 5px;
-  padding: 0.1rem;
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-bottom: 1em;
-  display: table;
-  justify-content: space-around;
-}
-
-.pendingTeacherCell {
-  overflow-wrap: break-word;
-  border: 1px solid #fb90b7;
-  text-align: justify;
-  justify-content: space-around;
-  padding: 3px;
-  border-radius: 5px;
-  /* margin-left: 1em;
-  margin-right: 1em; */
-  display: table-cell;
-}
-
-.feedbackReactions{
-  background-color: white;
-  width: 20em;
-  height: 20em;
-  position: relative;
-  border-radius: 1em;
-  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 2em;
-  margin-left: 2em;
-  margin-right: 2em;
-}
-
+.pendingTeacherRows,
 .pendingFeedbackRows {
-  overflow-wrap: break-word;
-  text-align: center;
-  border-radius: 5px;
-  padding: 0.1rem;
-  margin-top: 1em;
-  margin-right: 1em;
-  margin-left: 1em;
-  margin-bottom: 1em;
-  display: table;
-  justify-content: space-around;
+  margin-top: 0.8em;
+  margin-bottom: 0.4em;
 }
 
+.pendingTeacherCell,
 .pendingFeedbackCell {
-  overflow-wrap: break-word;
   border: 1px solid #fb90b7;
-  text-align: justify;
-  justify-content: space-around;
-  padding: 3px;
-  border-radius: 5px;
-  /* margin-left: 1em;
-  margin-right: 1em; */
+  border-radius: 0.25em;
   display: table-cell;
+  width: 26.5%;
 }

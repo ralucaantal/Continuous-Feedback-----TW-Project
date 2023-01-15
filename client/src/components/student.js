@@ -179,10 +179,20 @@ export default function Student() {
         <label className="pagStudent">Pagina studentului</label>
         <ul>
           <li>
-            <a onClick={handleEntryActivityClick}>Accesare activitate</a>
+            <a
+              onClick={handleEntryActivityClick}
+              style={{ fontFamily: "CustomFont", fontSize: "15px" }}
+            >
+              Accesare activitate
+            </a>
           </li>
           <li>
-            <a onClick={handleLogout}>Logout</a>
+            <a
+              onClick={handleLogout}
+              style={{ fontFamily: "CustomFont", fontSize: "15px" }}
+            >
+              Logout
+            </a>
           </li>
         </ul>
       </nav>
@@ -208,69 +218,62 @@ export default function Student() {
             </div>
           </form>
         </div>
-        <div
-          id="feedback"
-          style={{ display: "none",
-          //  width: "100%", height: "100%" 
-          }}
-        >
+        <div id="feedback" style={{ display: "none" }}>
           <div className="coverFeedback">
-            <form 
-            className="divFeedback" 
-            onSubmit={handleFeedback}>
+            <form className="divFeedback" onSubmit={handleFeedback}>
               <div className="reactions">
-              <div
-                className="coverReaction"
-                onClick={(e) => {
-                  feedback.reaction = "smiley";
-                }}
-              >
-                <img
-                  src={smiley}
-                  alt="smiley face"
-                  style={{ width: "25%", height: "25%" }}
-                ></img>
-                <h4>Smiley face</h4>
-              </div>
-              <div
-                className="coverReaction"
-                onClick={(e) => {
-                  feedback.reaction = "frowny";
-                }}
-              >
-                <img
-                  src={frowny}
-                  alt="smiley face"
-                  style={{ width: "25%", height: "25%" }}
-                ></img>
-                <h4>Frowny face</h4>
-              </div>
-              <div
-                className="coverReaction"
-                onClick={(e) => {
-                  feedback.reaction = "surprised";
-                }}
-              >
-                <img
-                  src={surprised}
-                  alt="smiley face"
-                  style={{ width: "25%", height: "25%" }}
-                ></img>
-                <h4>Surprised face</h4>
-              </div>
-              <div
-                className="coverReaction"
-                onClick={(e) => {
-                  feedback.reaction = "confused";
-                }}
-              >
-                <img
-                  src={confused}
-                  alt="smiley face"
-                  style={{ width: "25%", height: "25%" }}
-                ></img>
-                <h4>Confused face</h4>
-              </div>
+                <div
+                  className="coverReaction"
+                  onClick={(e) => {
+                    feedback.reaction = "smiley";
+                  }}
+                >
+                  <img
+                    src={smiley}
+                    alt="smiley face"
+                    style={{ width: "25%", height: "25%" }}
+                  ></img>
+                  <h4>Smiley face</h4>
+                </div>
+                <div
+                  className="coverReaction"
+                  onClick={(e) => {
+                    feedback.reaction = "frowny";
+                  }}
+                >
+                  <img
+                    src={frowny}
+                    alt="smiley face"
+                    style={{ width: "25%", height: "25%" }}
+                  ></img>
+                  <h4>Frowny face</h4>
+                </div>
+                <div
+                  className="coverReaction"
+                  onClick={(e) => {
+                    feedback.reaction = "surprised";
+                  }}
+                >
+                  <img
+                    src={surprised}
+                    alt="smiley face"
+                    style={{ width: "25%", height: "25%" }}
+                  ></img>
+                  <h4>Surprised face</h4>
+                </div>
+                <div
+                  className="coverReaction"
+                  onClick={(e) => {
+                    feedback.reaction = "confused";
+                  }}
+                >
+                  <img
+                    src={confused}
+                    alt="smiley face"
+                    style={{ width: "25%", height: "25%" }}
+                  ></img>
+                  <h4>Confused face</h4>
+                </div>
               </div>
               <div className="feedback-btn">
                 <button className="btn1">Ofera Feedback</button>
