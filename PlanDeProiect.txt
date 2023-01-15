@@ -8,3 +8,4 @@ acordate unei activitati la click pe ea
 ->la conectarea cu un cont de student, studentii pot introduce un cod unic de la o aplicatie,
 si, daca acesta exista, pot oferi feedback(daca se afla intre momentul de start si cel de final 
 al activitatii)
+->la logout se va sterge tokenul din localStorage
