@@ -52,8 +52,8 @@ export default function Register() {
         .then((data) => {
           console.log(data.message);
           setErrorDataRegister({ message: data.message });
-          if(data.message==="s-a adaugat cu succes!"){
-            window.location.href="/login"
+          if (data.message === "s-a adaugat cu succes!") {
+            window.location.href = "/login";
           }
         })
         .catch((error) => {
@@ -74,14 +74,14 @@ export default function Register() {
   const handleChange = (e) => {
     //e.preventDefault();
     console.log(e.target.value);
-    registerData.type=e.target.value;
+    registerData.type = e.target.value;
   };
 
   return (
     <div className="main">
       <div className="loginForm">
         <form onSubmit={handleSubmit}>
-          <div className="cover">
+          <div className="coverRegister">
             <h1>Inregistreaza-te</h1>
             <input
               type="user"
@@ -94,26 +94,26 @@ export default function Register() {
               placeholder="password"
               onChange={(e) => (registerData.password = e.target.value)}
             />
-
-            <input
-              type="radio"
-              id="student"
-              name="userType"
-              value="STUDENT"
-              onChange={handleChange}
-            />
-            <label>Student</label>
-            <br></br>
-            <input
-              type="radio"
-              id="profesor"
-              name="userType"
-              value="PROFESOR"
-              onChange={handleChange}
-            />
-            <label>Profesor</label>
-            <br></br>
-
+            <div className="checkbox">
+              <input
+                type="radio"
+                id="student"
+                name="userType"
+                value="STUDENT"
+                onChange={handleChange}
+              />
+              <label>Student</label>
+              <br></br>
+              <input
+                type="radio"
+                id="profesor"
+                name="userType"
+                value="PROFESOR"
+                onChange={handleChange}
+              />
+              <label>Profesor</label>
+              <br></br>
+            </div>
             <div className="login-btn">
               <button className="btn1">INREGISTRARE</button>
             </div>

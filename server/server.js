@@ -214,7 +214,35 @@ app.post("/showActivities", (req, res) => {
       // console.log(data);
     });
 
- // res.send({ message: "eroare" });
+  // res.send({ message: "eroare" });
+});
+
+app.post("/getFeedbacks", (req, res) => {
+  console.log("in getFeedbacks am venit cu request: ", req.body);
+  let idActivity = req.body.id;
+  let feedbacks = [];
+  pgClient
+    .query("select * from feedbacks where id_activitate=$1", [idActivity])
+    .then((res) => res.rows)
+    .then((data) => {
+      for (let i = 0; i < data.length; i++) {
+        let auxArray = [];
+        let id_feedback = data[i].id_feedback;
+        let reactie = data[i].reactie;
+        let timp = data[i].timp;
+        auxArray.push(id_feedback, reactie, timp);
+        feedbacks.push(auxArray);
+      }
+      if (data.length > 0) {
+        res.send({ message: feedbacks });
+      } else {
+        res.send({ message: "Aceasta activitate nu are niciun feedback!" });
+      }
+      // console.log(data.length);
+      // console.log(data);
+    });
+
+  // res.send({ message: "eroare" });
 });
 
 app.get("/api", (req, res) => {

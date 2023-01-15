@@ -114,6 +114,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: flex-start;
 }
 
 .addActivityForm {
@@ -123,7 +124,7 @@ a:hover {
 .myActivities {
   background-color: white;
   text-align: center;
-  width: 600em;
+  width: 28.5em;
   height: 35em;
   position: relative;
   border-radius: 1em;
@@ -132,12 +133,80 @@ a:hover {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  align-items: center;
   margin-top: 2em;
   margin-left: 2em;
   margin-right: 2em;
   overflow: auto;
 }
 
-h3{
+h3 {
   margin-top: 1em;
+  text-align: center;
+}
+
+.pendingTeacherRows {
+  overflow-wrap: break-word;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.1rem;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-bottom: 1em;
+  display: table;
+  justify-content: space-around;
+}
+
+.pendingTeacherCell {
+  overflow-wrap: break-word;
+  border: 1px solid #fb90b7;
+  text-align: justify;
+  justify-content: space-around;
+  padding: 3px;
+  border-radius: 5px;
+  /* margin-left: 1em;
+  margin-right: 1em; */
+  display: table-cell;
+}
+
+.feedbackReactions{
+  background-color: white;
+  width: 20em;
+  height: 20em;
+  position: relative;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.pendingFeedbackRows {
+  overflow-wrap: break-word;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.1rem;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+  margin-bottom: 1em;
+  display: table;
+  justify-content: space-around;
+}
+
+.pendingFeedbackCell {
+  overflow-wrap: break-word;
+  border: 1px solid #fb90b7;
+  text-align: justify;
+  justify-content: space-around;
+  padding: 3px;
+  border-radius: 5px;
+  /* margin-left: 1em;
+  margin-right: 1em; */
+  display: table-cell;
 }

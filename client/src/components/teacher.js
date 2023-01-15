@@ -14,6 +14,10 @@ export default function Teacher() {
   const [password, setPassword] = useState({ password: "" });
   const [type, setType] = useState({ type: "" });
   const [token, setToken] = useState({ token: localStorage.getItem("token") });
+  const [idSelectedActivity, setIdSelectedActivity] = useState({ id: "" });
+  const [pendingTeacherRows, setPendingTeacherRows] = useState([]);
+  const [feedbackRows, setFeedbackRows] = useState([]);
+  const [errorDataFeedbacks, setErrorDataFeedbacks] = useState({ message: "" });
 
   function decodeJWT() {
     if (localStorage.getItem("token")) {
@@ -89,6 +93,48 @@ export default function Teacher() {
           setPendingTeacherRows(data.message);
         } else {
           console.log(data.message);
+        }
+        // setErrorDataRegisterActivity({ message: data.message });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleActivityClick = (e) => {
+    console.log("Am dat click");
+    document.getElementById("feedbackReactions").style.display = "block";
+    console.log(e.target.id);
+    setIdSelectedActivity({ id: e.target.id });
+
+    const data = {
+      id: e.target.id,
+    };
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    console.log(requestOptions);
+    let input = IPv4 + ":5000/getFeedbacks";
+
+    fetch(input, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          console.log(data.message);
+
+          if (data.message === "Aceasta activitate nu are niciun feedback!") {
+            setErrorDataFeedbacks({ message: data.message });
+            setFeedbackRows([]);
+            document.getElementById("eroareFeedback").style.display = "block";
+          } else {
+            setFeedbackRows(data.message);
+            document.getElementById("eroareFeedback").style.display = "none";
+          }
+        } else {
+          console.log(data);
         }
         // setErrorDataRegisterActivity({ message: data.message });
       })
@@ -188,8 +234,6 @@ export default function Teacher() {
     }
   };
 
-  const [pendingTeacherRows, setPendingTeacherRows] = useState([]);
-
   return (
     <div>
       <nav>
@@ -247,7 +291,7 @@ export default function Teacher() {
         >
           <h3>Activitatile mele</h3>
 
-          <div className="pendingTeacherRows">
+          <div className="pendingTeacherRows" style={{ width: "25em" }}>
             <div className="pendingTeacherRows">
               <span
                 className="pendingTeacherCell"
@@ -302,10 +346,12 @@ export default function Teacher() {
                     alignItems: "center",
                   }}
                 >
-                  <div className="pendingTeacherRow">
+                  <div className="pendingTeacherRow" style={{ width: "100%" }}>
                     <span
                       className="pendingTeacherCell"
                       style={{ width: "25%" }}
+                      onClick={handleActivityClick}
+                      id={row[0]}
                     >
                       {row[0]}
                     </span>
@@ -332,6 +378,67 @@ export default function Teacher() {
               );
             })}
           </div>
+        </div>
+        <div
+          className="feedbackReactions"
+          id="feedbackReactions"
+          style={{ display: "none" }}
+        >
+          <h3>Reactiile activitatii cu id-ul: {idSelectedActivity.id}</h3>
+          <div className="pendingFeedbackRows" style={{ width: "25em" }}>
+            <div className="pendingFeedbackRows">
+              <span
+                className="pendingFeedbackCell"
+                style={{
+                  width: "50%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Reactie
+              </span>
+              <span
+                className="pendingFeedbackCell"
+                style={{
+                  width: "50%",
+                  background: "rgb(243, 188, 197)",
+                  textAlign: "center",
+                }}
+              >
+                Data
+              </span>
+            </div>
+            {feedbackRows.map((row) => {
+              return (
+                <div
+                  key={row[0]}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    width: "100%",
+                    alignItems: "center",
+                  }}
+                >
+                  <div className="pendingFeedbackRow" style={{ width: "100%" }}>
+                    <span
+                      className="pendingFeedbackCell"
+                      style={{ width: "50%" }}
+                    >
+                      {row[1]}
+                    </span>
+                    <span
+                      className="pendingFeedbackCell"
+                      style={{ width: "50%" }}
+                    >
+                      {row[2]}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div id="eroareFeedback" style={{display: "none"}}>{errorDataFeedbacks.message}</div>
         </div>
       </div>
     </div>
