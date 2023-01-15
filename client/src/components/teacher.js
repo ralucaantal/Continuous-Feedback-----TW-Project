@@ -240,13 +240,28 @@ export default function Teacher() {
         <label className="pagProfesor">Pagina profesorului</label>
         <ul>
           <li>
-            <a onClick={handleNewActivityClick}>Adauga activitate</a>
+            <a
+              onClick={handleNewActivityClick}
+              style={{ fontFamily: "CustomFont", fontSize: "15px" }}
+            >
+              Adaugă activitate
+            </a>
           </li>
           <li>
-            <a onClick={handleMyActivitiesClick}>Activitatile mele</a>
+            <a
+              onClick={handleMyActivitiesClick}
+              style={{ fontFamily: "CustomFont", fontSize: "15px" }}
+            >
+              Activitățile mele
+            </a>
           </li>
           <li>
-            <a onClick={handleLogout}>Logout</a>
+            <a
+              onClick={handleLogout}
+              style={{ fontFamily: "CustomFont", fontSize: "15px" }}
+            >
+              Logout
+            </a>
           </li>
         </ul>
       </nav>
@@ -258,20 +273,20 @@ export default function Teacher() {
         >
           <form onSubmit={handleSubmit}>
             <div className="coverteacher">
-              <h3>Adauga activitate</h3>
+              <h3>Adaugă activitate</h3>
 
               <input
                 type="descriere"
-                placeholder="descriere activitate"
+                placeholder="descriere"
                 onChange={(e) => (activityData.description = e.target.value)}
               />
 
-              <h5>Incepe la: </h5>
+              <h5>Începe la: </h5>
               <input
                 type="datetime-local"
                 onChange={(e) => (activityData.start = e.target.value)}
               />
-              <h5>Se termina la: </h5>
+              <h5>Se termină la: </h5>
               <input
                 type="datetime-local"
                 onChange={(e) => (activityData.final = e.target.value)}
@@ -289,90 +304,49 @@ export default function Teacher() {
           id="myActivities"
           style={{ display: "none" }}
         >
-          <h3>Activitatile mele</h3>
+          <h3>Activitățile mele</h3>
 
-          <div className="pendingTeacherRows" style={{ width: "25em" }}>
+          <div className="pendingTeacherRows">
             <div className="pendingTeacherRows">
               <span
                 className="pendingTeacherCell"
-                style={{
-                  width: "25%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Cod activitate
+                Codul activității
               </span>
               <span
                 className="pendingTeacherCell"
-                style={{
-                  width: "25%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Descriere
+                Descrierea activității
               </span>
               <span
                 className="pendingTeacherCell"
-                style={{
-                  width: "25%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Incepe la
+                Activitatea începe
               </span>
               <span
                 className="pendingTeacherCell"
-                style={{
-                  width: "25%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Se termina la
+                Activitatea se termină
               </span>
             </div>
             {pendingTeacherRows.map((row) => {
               return (
-                <div
-                  key={row[0]}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                >
-                  <div className="pendingTeacherRow" style={{ width: "100%" }}>
+                <div key={row[0]}>
+                  <div className="pendingTeacherRow">
                     <span
                       className="pendingTeacherCell"
-                      style={{ width: "25%" }}
                       onClick={handleActivityClick}
                       id={row[0]}
                     >
                       {row[0]}
                     </span>
-                    <span
-                      className="pendingTeacherCell"
-                      style={{ width: "25%" }}
-                    >
-                      {row[1]}
-                    </span>
-                    <span
-                      className="pendingTeacherCell"
-                      style={{ width: "25%" }}
-                    >
-                      {row[2]}
-                    </span>
-                    <span
-                      className="pendingTeacherCell"
-                      style={{ width: "25%" }}
-                    >
-                      {row[3]}
-                    </span>
+                    <span className="pendingTeacherCell">{row[1]}</span>
+                    <span className="pendingTeacherCell">{row[2]}</span>
+                    <span className="pendingTeacherCell">{row[3]}</span>
                   </div>
                 </div>
               );
@@ -384,61 +358,36 @@ export default function Teacher() {
           id="feedbackReactions"
           style={{ display: "none" }}
         >
-          <h3>Reactiile activitatii cu id-ul: {idSelectedActivity.id}</h3>
-          <div className="pendingFeedbackRows" style={{ width: "25em" }}>
+          <h3>Reacțiile activității "{idSelectedActivity.id}"</h3>
+          <div className="pendingFeedbackRows">
             <div className="pendingFeedbackRows">
               <span
                 className="pendingFeedbackCell"
-                style={{
-                  width: "50%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Reactie
+                Descrierea reacției
               </span>
               <span
                 className="pendingFeedbackCell"
-                style={{
-                  width: "50%",
-                  background: "rgb(243, 188, 197)",
-                  textAlign: "center",
-                }}
+                style={{ background: "rgb(243, 188, 197)" }}
               >
-                Data
+                Reacția este înregistrată
               </span>
             </div>
             {feedbackRows.map((row) => {
               return (
-                <div
-                  key={row[0]}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    width: "100%",
-                    alignItems: "center",
-                  }}
-                >
-                  <div className="pendingFeedbackRow" style={{ width: "100%" }}>
-                    <span
-                      className="pendingFeedbackCell"
-                      style={{ width: "50%" }}
-                    >
-                      {row[1]}
-                    </span>
-                    <span
-                      className="pendingFeedbackCell"
-                      style={{ width: "50%" }}
-                    >
-                      {row[2]}
-                    </span>
+                <div key={row[0]}>
+                  <div className="pendingFeedbackRow">
+                    <span className="pendingFeedbackCell">{row[1]}</span>
+                    <span className="pendingFeedbackCell">{row[2]}</span>
                   </div>
                 </div>
               );
             })}
           </div>
-          <div id="eroareFeedback" style={{display: "none"}}>{errorDataFeedbacks.message}</div>
+          <div id="eroareFeedback" style={{ display: "none" }}>
+            {errorDataFeedbacks.message}
+          </div>
         </div>
       </div>
     </div>

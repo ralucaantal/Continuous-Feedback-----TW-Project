@@ -1,13 +1,18 @@
 import React from "react";
+import "./css/home.css";
 
 export default function Home() {
   // const navigate=useNavigate();
-
   return (
     <div className="main">
       <div className="home">
-        <div className="cover" style={{width: "26em", height:"15em"}}>
-          <h1>Bine ai venit!</h1>
+        <div
+          className="cover"
+          style={{ width: "30em", height: "15em", margin: "auto" }}
+        >
+          <h1 style={{ fontFamily: "CustomFont", fontSize: "30px" }}>
+            Bine ai venit!
+          </h1>
           <div className="login-btn">
             <button
               className="btn1"
@@ -18,7 +23,9 @@ export default function Home() {
               LOGHEAZA-TE
             </button>
           </div>
-          <h2>Nu ai un cont?</h2>
+          <h1 style={{ fontFamily: "CustomFont", fontSize: "15px" }}>
+            Nu ai un cont?
+          </h1>
           <div className="login-btn">
             <button
               className="btn1"
