@@ -260,7 +260,7 @@ export default function Teacher() {
               onClick={handleLogout}
               style={{ fontFamily: "CustomFont", fontSize: "15px" }}
             >
-              Logout
+              Deconectare
             </a>
           </li>
         </ul>

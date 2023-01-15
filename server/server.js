@@ -10,8 +10,7 @@ const corsOptions = {
 var bodyParser = require("body-parser");
 
 const app = express();
-app.use(cors(corsOptions)); // Use this after the variable declaration
-// parse application/x-www-form-urlencoded
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -20,12 +19,6 @@ var pg = require("pg");
 var connectionString = "postgres://postgres:6203@localhost:5432/feedback";
 var pgClient = new pg.Client(connectionString);
 pgClient.connect();
-// pgClient
-//   .query("SELECT * FROM users")
-//   .then((res) => res.rows)
-//   .then((data) => {
-//     console.log(data[0].username);
-//   });
 
 app.post("/decodeJWT", (req, res) => {
   console.log("req= ", req.body);
@@ -210,11 +203,7 @@ app.post("/showActivities", (req, res) => {
         activities.push(auxArray);
       }
       res.send({ message: activities });
-      // console.log(data.length);
-      // console.log(data);
     });
-
-  // res.send({ message: "eroare" });
 });
 
 app.post("/getFeedbacks", (req, res) => {
@@ -238,15 +227,10 @@ app.post("/getFeedbacks", (req, res) => {
       } else {
         res.send({ message: "Aceasta activitate nu are niciun feedback!" });
       }
-      // console.log(data.length);
-      // console.log(data);
     });
-
-  // res.send({ message: "eroare" });
 });
 
 app.get("/api", (req, res) => {
-  console.log("ceva");
   res.json({ users: ["Profesor", "Student"] });
 });
 

@@ -7,7 +7,6 @@ import surprised from "./css/media/surprised.jpeg";
 import confused from "./css/media/confused.jpeg";
 
 export default function Student() {
-  // const navigate=useNavigate();
   const [errorDataEntry, setErrorDataEntry] = useState({
     message: "",
   });
@@ -33,6 +32,7 @@ export default function Student() {
         headers: { "Content-Type": "application/json" },
       };
 
+      //la logout se sterge tokenul din localStorage si se trimite pe home
       const handleLogout = (e) => {
         localStorage.removeItem("token");
         window.location.href = "/";
@@ -53,7 +53,6 @@ export default function Student() {
             setPassword({ password: data.password });
             setType({ type: data.type });
           }
-          // setErrorDataRegisterActivity({ message: data.message });
         })
         .catch((error) => {
           console.log(error);
@@ -94,9 +93,6 @@ export default function Student() {
     console.log(date);
     if (entryData.code !== "") {
       setActivityCode({ code: entryData.code });
-      // Array.from(document.querySelectorAll("input")).forEach(
-      //   (input) => (input.value = "")
-      // );
 
       const requestOptions = {
         method: "POST",
@@ -191,7 +187,7 @@ export default function Student() {
               onClick={handleLogout}
               style={{ fontFamily: "CustomFont", fontSize: "15px" }}
             >
-              Logout
+              Deconectare
             </a>
           </li>
         </ul>
