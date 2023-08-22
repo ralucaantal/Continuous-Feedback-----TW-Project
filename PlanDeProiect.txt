@@ -1,10 +1,11 @@
 Aplicatie de feedback continuu
---> Utilizatorii se vor autentifica pe prima pagina a aplicatiei
---> Odata logati, utilizatorii vor fi redirectionati spre pagina Home
---> Utilizatorii de tip profesor pe pagina home vor avea o sectiune de creare activitate si un istoric cu activitatile create, 
-care vor putea fi accesate prin click pentru a vizualiza statisticile oferite de feedback, dar si detalii despre respectiva activitate
---> Utilizatorii de tip student vor avea o sectiune de accesare activitate, unde vor putea introduce codul aferent unei activitati
---> Totodata, li se va afisa o lista cu activitatile la care au acces
---> Cu un click pe o activitate, studentilor li se va deschide pagina de feedback, care va afisa totodata si detalii despre activitatea respectiva, 
-si care va avea atasata si o sectiune in care se pot pune intrebari profesorilor
--->Atunci cand nu mai vor sa ofere feedback, studentii isi pot sterge activitatea din lista.
+->prima pagina a aplicatiei este pagina de bun venit, unde utilizatorii pot alege 
+sa isi faca un cont nou sau sa se conecteze
+->la crearea unui cont nou, utilizatorii sunt directionati pe pagina de conectare
+->la conectarea cu un cont de profesor, utilizatorii pot introduce noi activitati, 
+vizualiza istoricul cu toate activitatile adaugate, si vizualizarea de feedback-uri 
+acordate unei activitati la click pe ea
+->la conectarea cu un cont de student, studentii pot introduce un cod unic de la o aplicatie,
+si, daca acesta exista, pot oferi feedback(daca se afla intre momentul de start si cel de final 
+al activitatii)
+->la logout se va sterge tokenul din localStorage
