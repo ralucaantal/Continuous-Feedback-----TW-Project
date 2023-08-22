@@ -3,6 +3,15 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  background-color: #ffffff;
+  opacity: 0.8;
+  background: linear-gradient(135deg, #d0125755 25%, transparent 25%) -22px 0/ 44px 44px, linear-gradient(225deg, #d01257 25%, transparent 25%) -22px 0/ 44px 44px, linear-gradient(315deg, #d0125755 25%, transparent 25%) 0px 0/ 44px 44px, linear-gradient(45deg, #d01257 25%, #ffffff 25%) 0px 0/ 44px 44px;
+}
+
 @font-face {
   font-family: "CustomFont";
   src: url("../css/fonts/RolexLight.woff2");
